@@ -1,1 +1,7 @@
 /home/joyfulburger/Desktop/mailinator-v2/src/main/java/com/myralla/mailinator/MailinatorApplication.java
+/home/joyfulburger/Desktop/mailinator-v2/src/main/java/com/myralla/mailinator/config/RabbitConfig.java
+/home/joyfulburger/Desktop/mailinator-v2/src/main/java/com/myralla/mailinator/controllers/MailController.java
+/home/joyfulburger/Desktop/mailinator-v2/src/main/java/com/myralla/mailinator/dto/CallbackDTO.java
+/home/joyfulburger/Desktop/mailinator-v2/src/main/java/com/myralla/mailinator/dto/EmailDTO.java
+/home/joyfulburger/Desktop/mailinator-v2/src/main/java/com/myralla/mailinator/listener/RabbitMqConsumer.java
+/home/joyfulburger/Desktop/mailinator-v2/src/main/java/com/myralla/mailinator/services/EmailBatchConsumer.java
