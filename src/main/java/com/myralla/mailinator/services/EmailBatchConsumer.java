@@ -17,10 +17,16 @@ public class EmailBatchConsumer {
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
+    @Autowired
+    private MailgunService mailgunService;
+
     @Async
     public void processEmailBatch(EmailDTO message){
         log.info("Processing email batch: {}", message.getRecepient());
 //       mailgun api sending logic here ... wip
+
+//       TODO: add error handling and retry logic
+        mailgunService.sendEmail(message);
 
         CallbackDTO callbackMessage = new CallbackDTO();
         callbackMessage.setRecepient(message.getRecepient());
