@@ -6,6 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class EmailDTO {
+//    TODO: match the fields of the required payload in the mailgun API
     private String recepient;
     private String subject;
     private String body;
