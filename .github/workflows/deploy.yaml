@@ -28,11 +28,11 @@ jobs:
           context: .
           push: true
           tags: |
-            ${{ secrets.DOCKER_USERNAME }}/mailinator:latest
+            ${{ secrets.DOCKER_USERNAME }}/opulenz:opulenz-mailinator-${{ github.sha }}
 
       - name: Logout from Docker Hub
         run: docker logout
-        
+
       # - name: Firing a Push Notification to Push Listener
       #   run: |
       #       curl -X POST https://ci.opulenz.net/deploy/opulenz-mailinator \
