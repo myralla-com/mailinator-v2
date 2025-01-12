@@ -3,7 +3,7 @@ name: Build and Push Docker Image
 on:
   push:
     branches:
-      - release
+      - main
 
 jobs:
   build:
@@ -32,3 +32,9 @@ jobs:
 
       - name: Logout from Docker Hub
         run: docker logout
+        
+      # - name: Firing a Push Notification to Push Listener
+      #   run: |
+      #       curl -X POST https://ci.opulenz.net/deploy/opulenz-mailinator \
+      #       -H "Content-Type: application/json" \
+      #       -d '{"tag": "${{ github.sha }}", "apiKey": "${{ secrets.X_API_KEY }}"}'
