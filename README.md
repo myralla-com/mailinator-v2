@@ -1,1 +1,1 @@
-TODO: fix this repo, fix the release, ask guidance from someone who really understands git.
+This custom mailgun api model uses rabbitmq for handling retries, consuming batch send email tasks, etc.
