@@ -3,7 +3,6 @@ package com.myralla.mailinator.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-
 @Getter
 @Setter
 public class EmailDTO {

@@ -18,7 +18,7 @@ public class MailController {
     private MailgunService mailgunService;
 
     @PostMapping(path = "/send", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> processQueuedMails(@RequestBody EmailDTO emailDTO) {
-       return mailgunService.sendEmail(emailDTO);
+    public void processQueuedMails(@RequestBody EmailDTO emailDTO) {
+       mailgunService.sendEmail(emailDTO);
     }
 }
