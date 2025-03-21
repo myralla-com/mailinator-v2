@@ -26,7 +26,7 @@ public class EmailBatchConsumer {
 //       mailgun api sending logic here ... wip
 
 //       TODO: add error handling and retry logic
-        mailgunService.sendEmail(message);
+//        mailgunService.sendEmail(message);
 
         CallbackDTO callbackMessage = new CallbackDTO();
         callbackMessage.setRecepient(message.getRecepient());

@@ -14,8 +14,13 @@ public class RabbitMqConsumer {
     @Autowired
     private EmailBatchConsumer emailBatchConsumer;
 
+    /**
+     * Consume message from the queue
+     * the format of the DTO should be followed in order to prevent error in parsing the message
+     */
     @RabbitListener(queues = "email.batch.queue")
     public void consumeMessage(EmailDTO message) {
+        log.info("Message consumed : {}", message.printEmailDTO());
         log.info("Received a Queue for : {}", message.getRecepient());
         emailBatchConsumer.processEmailBatch(message);
     }

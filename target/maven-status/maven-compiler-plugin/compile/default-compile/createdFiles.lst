@@ -1,7 +1,0 @@
-com/myralla/mailinator/dto/EmailDTO.class
-com/myralla/mailinator/services/EmailBatchConsumer.class
-com/myralla/mailinator/controllers/MailController.class
-com/myralla/mailinator/dto/CallbackDTO.class
-com/myralla/mailinator/MailinatorApplication.class
-com/myralla/mailinator/config/RabbitConfig.class
-com/myralla/mailinator/listener/RabbitMqConsumer.class

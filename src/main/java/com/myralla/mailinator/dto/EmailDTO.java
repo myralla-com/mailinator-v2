@@ -3,6 +3,7 @@ package com.myralla.mailinator.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+
 @Getter
 @Setter
 public class EmailDTO {
@@ -11,4 +12,8 @@ public class EmailDTO {
     private String subject;
     private String body;
     private String sender;
+
+    public String printEmailDTO(){
+      return "EmailDTO: " + this.recepient + " " + this.subject + " " + this.body + " " + this.sender;
+    }
 }
