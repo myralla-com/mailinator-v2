@@ -11,4 +11,8 @@ public class EmailDTO {
     private String subject;
     private String body;
     private String sender;
+
+    public String printEmailDTO(){
+      return "EmailDTO: " + this.recepient + " " + this.subject + " " + this.body + " " + this.sender;
+    }
 }
