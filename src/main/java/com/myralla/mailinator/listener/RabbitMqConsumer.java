@@ -1,6 +1,8 @@
 package com.myralla.mailinator.listener;
 
-import com.myralla.mailinator.services.EmailBatchConsumer;
+import com.myralla.mailinator.dto.WebNotifDTO;
+import com.myralla.mailinator.services.MailgunService;
+import com.myralla.mailinator.services.WebNotifService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,17 +14,22 @@ import com.myralla.mailinator.dto.EmailDTO;
 public class RabbitMqConsumer {
 
     @Autowired
-    private EmailBatchConsumer emailBatchConsumer;
+    private WebNotifService webNotifService;
 
-    /**
-     * Consume message from the queue
-     * the format of the DTO should be followed in order to prevent error in parsing the message
-     */
+    @Autowired
+    private MailgunService mailgunService;
+
     @RabbitListener(queues = "email.batch.queue")
-    public void consumeMessage(EmailDTO message) {
-        log.info("Message consumed : {}", message.printEmailDTO());
-        log.info("Received a Queue for : {}", message.getRecepient());
-        emailBatchConsumer.processEmailBatch(message);
+    public void consumeEmailMessage(EmailDTO email) {
+        mailgunService.sendEmail(email);
     }
+
+    @RabbitListener(queues = "web.notification.queue")
+    public void consumeWebNotification(WebNotifDTO notification) {
+        webNotifService.sendNotification(notification);
+    }
+
+
+
 
 }
