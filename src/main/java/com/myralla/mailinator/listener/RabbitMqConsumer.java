@@ -29,7 +29,4 @@ public class RabbitMqConsumer {
         webNotifService.sendNotification(notification);
     }
 
-
-
-
 }
