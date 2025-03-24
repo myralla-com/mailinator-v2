@@ -2,22 +2,26 @@ package com.myralla.mailinator.services;
 
 import com.myralla.mailinator.models.Notification;
 import com.myralla.mailinator.models.NotificationType;
-import com.myralla.mailinator.repositories.NotificationRespository;
+import com.myralla.mailinator.repositories.NotificationRepository;
 import com.myralla.mailinator.repositories.NotificationTypeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import com.myralla.mailinator.dto.WebNotifDTO;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
+
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
 public class WebNotifService {
 
     @Autowired
-    private NotificationRespository notificationRespository;
+    private NotificationRepository notificationRespository;
 
     @Autowired
     private NotificationTypeRepository notificationTypeRepository;
@@ -49,6 +53,7 @@ public class WebNotifService {
             NotificationType notificationType = notificationTypeRepository.findByType(webNotifDTO.getNotificationType());
             notification.setNotificationType(notificationType);
             notification.setMessage(webNotifDTO.getMessage());
+            notification.setSubject(webNotifDTO.getSubject());
             notification.setUserId(webNotifDTO.getUserId());
             notificationRespository.save(notification);
 
@@ -58,4 +63,17 @@ public class WebNotifService {
         }
     }
 
+    public ResponseEntity<Object> getNotifications(String keycloakId){
+        log.info("Request to get notifications for user : {}", keycloakId);
+        List<Notification> notifications = notificationRespository.findTop10ByUserIdOrderByCreatedAtDesc(keycloakId);
+        List<WebNotifDTO> response = notifications.stream().map(notification ->
+                new WebNotifDTO(
+                        notification.getUserId(),
+                        notification.getMessage(),
+                        notification.getSubject(),
+                        notification.getNotificationType().getType()
+                )).collect(Collectors.toList());
+
+        return ResponseEntity.ok(response);
+    }
 }

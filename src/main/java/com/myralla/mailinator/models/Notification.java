@@ -23,6 +23,9 @@ public class Notification {
     @Column(name = "userId")
     private String userId;
 
+    @Column(name = "subject")
+    private String subject;
+
     @ManyToOne
     @JoinColumn(name = "notification_type_id")
     private NotificationType notificationType;
