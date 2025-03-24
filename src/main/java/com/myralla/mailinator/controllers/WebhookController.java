@@ -15,6 +15,5 @@ public class WebhookController {
     @PostMapping(path = "/mailgun")
     public void processWebhook(@RequestBody Map<String, Object> data) {
         log.info("Received webhook data: {}", data);
-
     }
 }
