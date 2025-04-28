@@ -29,7 +29,7 @@ USER spring:spring
 COPY --from=build /usr/src/app/target/*.jar app.jar
 
 # Expose the port the application runs on
-EXPOSE 8080
+EXPOSE 8884
 
 # Run the application
 ENTRYPOINT ["java","-Duser.timezone=Asia/Manila","-Dlog4j2.formatMsgNoLookups=true","-jar","/app.jar"]

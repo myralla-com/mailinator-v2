@@ -36,31 +36,33 @@ public class WebNotifService {
         return emitter;
     }
 
-    public void sendNotification(WebNotifDTO webNotifDTO){
+    public void sendNotification(WebNotifDTO webNotifDTO) {
         log.info("Attempting to send notification to user: {}", webNotifDTO.getUserId());
         SseEmitter emitter = emitters.get(webNotifDTO.getUserId());
         if (emitter == null) {
             log.warn("No active SSE connection found for user: {}", webNotifDTO.getUserId());
+            saveNotification(webNotifDTO);
             return;
         }
         try {
             log.info("Sending SSE message: {}", webNotifDTO.getMessage());
             emitter.send(SseEmitter.event().data(webNotifDTO));
             log.info("Message successfully sent!");
-
-            // save notification to database
-            Notification notification = new Notification();
-            NotificationType notificationType = notificationTypeRepository.findByType(webNotifDTO.getNotificationType());
-            notification.setNotificationType(notificationType);
-            notification.setMessage(webNotifDTO.getMessage());
-            notification.setSubject(webNotifDTO.getSubject());
-            notification.setUserId(webNotifDTO.getUserId());
-            notificationRespository.save(notification);
-
         } catch (Exception e) {
             log.error("Error sending SSE message to user {}: {}", webNotifDTO.getUserId(), e.getMessage());
             emitters.remove(webNotifDTO.getUserId());
         }
+        saveNotification(webNotifDTO);
+    }
+
+    private void saveNotification(WebNotifDTO webNotifDTO) {
+        Notification notification = new Notification();
+        NotificationType notificationType = notificationTypeRepository.findByType(webNotifDTO.getNotificationType());
+        notification.setNotificationType(notificationType);
+        notification.setMessage(webNotifDTO.getMessage());
+        notification.setSubject(webNotifDTO.getSubject());
+        notification.setUserId(webNotifDTO.getUserId());
+        notificationRespository.save(notification);
     }
 
     public ResponseEntity<Object> getNotifications(String keycloakId){
