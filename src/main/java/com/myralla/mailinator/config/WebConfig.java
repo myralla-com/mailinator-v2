@@ -19,11 +19,11 @@ public class WebConfig {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/api/**")
-                        .allowedOrigins(cors1Url, cors2Url)
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                        .allowedHeaders("*")
-                        .allowCredentials(true);
+                registry.addMapping("/**") // Use /** to apply to all paths
+                        .allowedOriginPatterns("*") // Accept requests from any origin
+                        .allowedMethods("*")        // Allow all HTTP methods
+                        .allowedHeaders("*")        // Allow all headers
+                        .allowCredentials(true);    // Allow credentials (cookies, auth headers, etc.)
             }
         };
     }
