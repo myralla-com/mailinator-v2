@@ -20,7 +20,7 @@ public class EmailHistory {
     @Column(name = "subject")
     private String subject;
 
-    @Column(name = "body")
+    @Column(name = "body", columnDefinition = "LONGTEXT")
     private String body;
 
     @ManyToOne
