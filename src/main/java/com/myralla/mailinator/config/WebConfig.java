@@ -23,7 +23,7 @@ public class WebConfig {
                         .allowedOrigins("*") // Accept requests from any origin
                         .allowedMethods("*")        // Allow all HTTP methods
                         .allowedHeaders("*")        // Allow all headers
-                        .allowCredentials(true);    // Allow credentials (cookies, auth headers, etc.)
+                        .allowCredentials(false);    // Allow credentials (cookies, auth headers, etc.)
             }
         };
     }
