@@ -20,7 +20,7 @@ public class WebConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**") // Use /** to apply to all paths
-                        .allowedOriginPatterns("*") // Accept requests from any origin
+                        .allowedOrigins("*") // Accept requests from any origin
                         .allowedMethods("*")        // Allow all HTTP methods
                         .allowedHeaders("*")        // Allow all headers
                         .allowCredentials(true);    // Allow credentials (cookies, auth headers, etc.)
